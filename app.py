@@ -3,11 +3,9 @@ import csv
 import os
 from datetime import datetime, timedelta
 import locale
-import pytz
 
 app = Flask(__name__)
 FILENAME = "baillements.csv"
-timezone = pytz.timezone("Europe/Paris")
 
 # Mettre en français le format des dates
 locale.setlocale(locale.LC_TIME, "")
@@ -62,13 +60,9 @@ def index():
 
 @app.route('/add', methods=['POST'])
 def add_baillement():
-    # Obtenir l'heure actuelle avec le fuseau horaire spécifié
-    now = datetime.now(timezone)
-    
-    # Formater et enregistrer l'heure dans le fichier CSV
     with open(FILENAME, mode='a', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow([now.isoformat()])  # Enregistrer l'heure dans le format ISO
+        writer.writerow([datetime.now().isoformat()])
     return redirect(url_for('index'))
 
 @app.route('/history/<period>')
