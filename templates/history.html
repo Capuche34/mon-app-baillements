@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique des Bâillements</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="tabs">
+        <a class="tab" id="accueil-tab" href="{{ url_for('index') }}">Accueil</a>
+        <a class="tab-active" id="historique-tab" href="{{ url_for('history', period='jour') }}">Historique</a>
+        <button id="darkModeToggle">🌙</button>
+    </div>
+    <main>
+        <h2>Période : {{ period }}</h2>
+        <!-- Boutons de tri -->
+        <div class="filter-buttons">
+            <a class="filter-button {% if period == 'jour' %}active{% endif %}" href="{{ url_for('history', period='jour') }}">Jour</a>
+            <a class="filter-button {% if period == 'semaine' %}active{% endif %}" href="{{ url_for('history', period='semaine') }}">Semaine</a>
+            <a class="filter-button {% if period == 'mois' %}active{% endif %}" href="{{ url_for('history', period='mois') }}">Mois</a>
+            <a class="filter-button {% if period == 'annee' %}active{% endif %}" href="{{ url_for('history', period='annee') }}">Année</a>
+            <a class="filter-button {% if period == 'toujours' %}active{% endif %}" href="{{ url_for('history', period='toujours') }}">Toujours</a>
+        </div>
+        <!-- Tableau des bâillements -->
+        {% if baillements %}
+            <ul class="baillement-list">
+                {% for baillement in baillements[-5:] %}
+                    <li>{{ baillement.strftime('%A %d %B - %H:%M') }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="baillement-aucun">Aucun bâillement n'a été enregistré</p>
+        {% endif %}
+        <form action="{{ url_for('delete_last_entry') }}" method="post" style="display:inline;">
+            <button type="submit">Supprimer le dernier enregistrement</button>
+        </form>
+        <!-- Conteneurs pour les graphiques -->
+        <div class="chart-container">
+            <h3>Aujourd'hui</h3>
+            <canvas id="chartToday" width="400" height="75"></canvas>
+        </div>
+        <div class="chart-container">
+            <h3>Hier</h3>
+            <canvas id="chartYesterday" width="400" height="75"></canvas>
+        </div>
+        <div class="chart-container">
+            <h3>Avant-hier</h3>
+            <canvas id="chartDayBeforeYesterday" width="400" height="75"></canvas>
+        </div>
+        <div id="graphData" style="display:none;">{{ graph_data | tojson }}</div>
+    </main>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

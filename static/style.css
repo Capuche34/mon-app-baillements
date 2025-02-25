@@ -1,0 +1,213 @@
+/* Global */
+:root {
+    --body-bg: white;
+    --body-color: #121212;
+    --tab-inactive-bg: #d8d8d8; /* Un peu plus clair que le fond du body */
+    --tab-inactive-text: #000000;
+    --tab-active-bg: #caffce;
+    --tab-active-text: #121212;
+    --tabs-color: #cacaca;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    text-align: center;
+    background: white;
+    color: #121212;
+    transition: background-color 0.5s, color 0.5s;
+    margin-top: 100px;
+}
+
+h1 {
+    font-size: 26px;
+    margin: 20px 0;
+}
+
+p {
+    font-size: 16px;
+    margin: 10px 30px 20px 20px;
+}
+
+/* Bouton ajouter */
+button.add-baillement {
+    width: 90vw;  /* Presque toute la largeur */
+    height: 70vh; /* Presque toute la hauteur */
+    font-size: 24px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button.add-baillement:hover {
+    background-color: #45a049;
+}
+
+
+/* Historique */
+
+.baillement-list {
+    background: rgb(204, 204, 204);
+    border-radius: 10px;
+    font-size: 18px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: left;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.baillement-aucun {
+    background: rgb(204, 204, 204);
+    border-radius: 10px;
+    font-size: 16px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.tabs {
+    position:fixed;
+    display: flex;
+    justify-content: center;
+    background-color: var(--tabs-color);
+    padding: 10px;
+    border-radius: 20px;
+    width: 93%;
+    top: 10px;
+    left: 4px;
+}
+
+.tab {
+    padding: 15px 30px;
+    background: var(--tab-inactive-bg);
+    color: var(--tab-inactive-text);
+    margin: 0 5px;
+    border-radius: 5px 5px 0 0;
+    text-decoration: None;
+}
+.tab-active {
+    padding: 15px 30px;
+    background: var(--tab-active-bg);
+    color: var(--tab-active-text);
+    margin: 0 5px;
+    border-radius: 5px 5px 0 0;
+    text-decoration: None;
+}
+
+.tab:hover {
+    background: #888;
+}
+
+.filter-buttons {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.filter-button {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.filter-button:hover {
+    background-color: #0056b3;
+}
+
+.filter-button.active {
+    background-color: #004085;
+    color: #ffffff;
+}
+
+.chart-container {
+    background-color: #c9c9c9; /* Couleur légèrement plus foncée que le fond de la page */
+    padding: 3px;
+    margin: 10px 0px 20px 0px;
+    border-radius: 5px;
+}
+
+canvas {
+    background-color: rgb(161, 161, 161);
+    border-radius: 5px;
+    padding: 5px;
+
+}
+
+
+/******************************************************/
+/* Dark Mode */
+/******************************************************/
+.dark-mode .baillement-aucun {
+    background: #333;
+    color: white;
+}
+
+.dark-mode canvas {
+    background-color: #035303;
+}
+
+.dark-mode .chart-container {
+    background-color: #0a0a0a;
+}
+
+.dark-mode {
+    background: #121212;
+    color: white;
+}
+
+.dark-mode .tabs {
+    background: #1f1f1f;
+}
+
+.dark-mode .tab {
+    background: #303030;
+    color: #ffffff;
+    font-style: None;
+}
+.dark-mode .tab-active {
+    background: #1d361d;
+    color: #ffffff;
+    font-style: None;
+}
+
+.dark-mode .add-baillement {
+    background: #035303;
+}
+
+.dark-mode .history-item {
+    background: #333;
+    color: white;
+}
+
+.dark-mode .baillement-list {
+    background: #333;
+    color: white;
+}
+
+#darkModeToggle {
+    top: 10px;
+    right: 10px;
+    color: #45a049;
+    width: 100px;
+    height: 50px;
+    border-top-left-radius: 40%;
+    border-top-right-radius: 40%;
+    border-bottom-left-radius: 40%;
+    border-bottom-right-radius: 40%;
+}
+
+.dark-mode #darkModeToggle {
+    background: #303030;
+}
