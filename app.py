@@ -38,7 +38,7 @@ def format_datetime(timestamp):
 # Obtenir les bâillements filtrés
 def get_filtered_baillements(period):
 
-    now = datetime.now(datetime.timezone.utc)
+    now = datetime.now()
 
     now_plus_one_hour = now + timedelta(hours=1)
 
@@ -66,7 +66,9 @@ def index():
 def add_baillement():
     with open(FILENAME, mode='a', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow([datetime.now_plus_one_hour().isoformat()])
+        now = datetime.now()
+        now_plus_one_hour = now + timedelta(hours=1)
+        writer.writerow([now_plus_one_hour.isoformat()])
     return redirect(url_for('index'))
 
 @app.route('/history/<period>')
@@ -76,7 +78,7 @@ def history(period):
     baillements = [datetime.fromisoformat(b) if isinstance(b, str) else b for b in baillements]
     
     # Lire tous les bâillements pour les frises des trois derniers jours
-    now = datetime.now(datetime.timezone.utc)
+    now = datetime.now()
     now_plus_one_hour = now + timedelta(hours=1)
 
     last_three_days = [now_plus_one_hour - timedelta(days=i) for i in range(3)]
